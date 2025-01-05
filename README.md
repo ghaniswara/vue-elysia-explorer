@@ -1,5 +1,6 @@
 # Elysia - Vue - File Explorer
 
+![alt text](image.png)
 A simple file explorer using Elysia as backend and Vue as frontend.
 
 ## How to run
