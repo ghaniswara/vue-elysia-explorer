@@ -1,0 +1,29 @@
+{
+  "name": "file-explorer-mono",
+  "version": "0.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "test:backend": "bun test apps/backend/*",
+    "db:generate": "cd apps/backend && drizzle-kit generate",
+    "db:migrate": "cd apps/backend && drizzle-kit migrate",
+    "db:studio": "cd apps/backend && drizzle-kit studio",
+    "dev:frontend": "cd apps/frontend && bun run dev",
+    "dev:backend": "cd apps/backend && bun run dev",
+    "dev:all": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\""
+  },
+  "devDependencies": {
+    "prettier": "^3.0.3"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "dependencies": {
+    "bun-types": "^1.0.1",
+    "vitest": "^2.1.8"
+  }
+}
