@@ -36,7 +36,7 @@ const onClickFileOrFolder = () => {
 <template>
   <div class="">
     <div
-      class="flex flex-row gap-1 justify-start items-center px-2 hover:bg-gray-200"
+      class="flex flex-row gap-1 justify-start items-center px-2 hover:bg-gray-200 rounded-md cursor-pointer"
       @click.stop="onClickFileOrFolder"
     >
       <p
@@ -44,7 +44,7 @@ const onClickFileOrFolder = () => {
         @click.stop="onClickIcon"
         v-if="tree.type === 'folder'"
       >
-        {{ isOpen ? '📁' : '📂' }}
+        {{ isOpen ? '📂' : '📁' }}
       </p>
       <p v-else>📄</p>
       <p class="w-full rounded-md" @click="onClickFileOrFolder">
@@ -55,9 +55,9 @@ const onClickFileOrFolder = () => {
       <FolderTree
         class="first:mt-2"
         v-for="child in tree.children"
-        :key="child.path"
+        :key="child.id"
         :tree="child"
-        v-model:isOpen="childrenOpen[child.path]"
+        v-model:isOpen="childrenOpen[child.id]"
         @click.stop
       />
     </div>
