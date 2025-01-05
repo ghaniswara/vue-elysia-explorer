@@ -14,3 +14,4 @@ export const FolderTree = t.Recursive(Self => t.Object({
 export type folderTree = typeof FolderTree.static
 
 export const GetUserFoldersResponse = createResponseSchema((FolderTree));
+export const SearchFolderResponse = createResponseSchema(t.Array(FolderTree));

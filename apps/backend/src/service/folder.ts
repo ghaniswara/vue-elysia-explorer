@@ -45,6 +45,21 @@ export class FolderService {
 
     return res;
   }  
+
+  async findFoldersByPath(path: string) : Promise<folderTree[]> {
+    const folders = await this.folderRepository.findFoldersByPath(path);
+    let res : folderTree[] = []
+    for(const folder of folders) {
+        res.push({
+          id: folder.id,
+          name: folder.name,
+          path: folder.path,
+          type: 'folder',
+          children: []
+        })
+    }
+    return res;
+  }
 }
 
 export const folderService = new FolderService(folderRepository);

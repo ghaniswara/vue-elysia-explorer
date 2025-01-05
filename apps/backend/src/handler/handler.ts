@@ -1,6 +1,6 @@
 import Elysia, { t } from 'elysia';
-import { getUserFolders } from './folderHandler';
-import {   GetUserFoldersResponse } from '../model/folder';
+import { getUserFolders, searchFolder } from './folderHandler';
+import {   GetUserFoldersResponse, SearchFolderResponse } from '../model/folder';
 import { getUsers } from './userHandler';
 import { GetUsersResponse } from '../model/user';
 
@@ -18,6 +18,22 @@ const routes = new Elysia({prefix: '/api/v1'})
                 description: 'Get all folders for a user'
             },
             response: GetUserFoldersResponse
+        }
+    ).get(
+        '/folders/:username/search', 
+        ({params, query}) => searchFolder(params.username, decodeURIComponent(query.search)),
+        {
+            params: t.Object({
+                username: t.String(),
+            }),
+            query: t.Object({
+                search: t.String()
+            }),
+            detail: {
+                tags: ['Folder'],
+                description: 'Get all folders for a user'
+            },
+            response: SearchFolderResponse
         }
     )
     .get(

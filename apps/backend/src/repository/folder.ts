@@ -57,7 +57,7 @@ const getFolderByPath = async (path: string) => {
 
 const findFoldersByPath = async (path: string) => {
  const res = await db.query.folders.findMany({
-  where: like(folders.path, path),
+  where: like(folders.path, path+'%'),
  });
  return res;
 };

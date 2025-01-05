@@ -14,7 +14,7 @@
     "db:studio": "cd apps/backend && drizzle-kit studio",
     "dev:frontend": "cd apps/frontend && bun run dev",
     "dev:backend": "cd apps/backend && bun run dev",
-    "dev:all": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev:all": "concurrently \"bun run dev:frontend\" \"bun run dev:backend\" \"bun run db:start\"",
     "db:start": "docker compose up"
   },
   "devDependencies": {
