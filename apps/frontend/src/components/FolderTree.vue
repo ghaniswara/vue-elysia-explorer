@@ -15,8 +15,8 @@ const childrenOpen = ref<Record<string, boolean>>({})
 
 onMounted(() => {
   props.tree.children?.forEach((child) => {
-    if (!(child.name in childrenOpen.value)) {
-      childrenOpen.value[child.name] = true
+    if (!(child.id in childrenOpen.value)) {
+      childrenOpen.value[child.id] = true
     }
   })
 })
