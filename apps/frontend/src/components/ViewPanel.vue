@@ -1,6 +1,7 @@
 <script setup lang="ts">
+import { folderTree } from 'backend/src/model/folder'
 defineProps<{ 
-	filePreview: { path: string; id: string; name: string; children: any[]; type: "file" | "folder"; } | null;
+	filePreview: folderTree | null;
 }>()
 </script>
 
