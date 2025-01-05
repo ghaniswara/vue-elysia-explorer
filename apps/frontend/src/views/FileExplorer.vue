@@ -23,8 +23,9 @@ const fetchFolderTree = async () => {
     const response = await api.api.v1.folders[username as string].get({
     })
     folders.value = response?.data?.data ?? null
-    console.log(response)
-    console.log(folders.value)
+    if(folders.value) {
+     setFilePreview(folders.value)
+    }
   } catch (error) {
     console.error(error)
   } finally {
