@@ -6,9 +6,9 @@ INSERT INTO "users" ("name", "email", "password") VALUES ('User 3', 'user3@examp
 
 -- User 1
 INSERT INTO "folders" ("name", "path", "parent_id", "created_by") VALUES 
-('FolderA', '/', NULL, (SELECT id FROM "users" WHERE "email" = 'user1@example.com')),
-('FolderB', '/', NULL, (SELECT id FROM "users" WHERE "email" = 'user1@example.com')),
-('FolderC', '/', NULL, (SELECT id FROM "users" WHERE "email" = 'user1@example.com'));
+('FolderA', 'folderA', NULL, (SELECT id FROM "users" WHERE "email" = 'user1@example.com')),
+('FolderB', 'folderB', NULL, (SELECT id FROM "users" WHERE "email" = 'user1@example.com')),
+('FolderC', 'folderC', NULL, (SELECT id FROM "users" WHERE "email" = 'user1@example.com'));
 
 INSERT INTO "folders" ("name", "path", "parent_id", "created_by") VALUES 
 ('FolderA_A', 'folderA/folderA_A', (SELECT id FROM "folders" WHERE "name" = 'FolderA'), (SELECT id FROM "users" WHERE "email" = 'user1@example.com')),
@@ -22,9 +22,9 @@ INSERT INTO "folders" ("name", "path", "parent_id", "created_by") VALUES
 
 -- User 2
 INSERT INTO "folders" ("name", "path", "parent_id", "created_by") VALUES 
-('FolderA', '/', NULL, (SELECT id FROM "users" WHERE "email" = 'user2@example.com')),
-('FolderB', '/', NULL, (SELECT id FROM "users" WHERE "email" = 'user2@example.com')),
-('FolderC', '/', NULL, (SELECT id FROM "users" WHERE "email" = 'user2@example.com'));
+('FolderA', 'folderA', NULL, (SELECT id FROM "users" WHERE "email" = 'user2@example.com')),
+('FolderB', 'folderB', NULL, (SELECT id FROM "users" WHERE "email" = 'user2@example.com')),
+('FolderC', 'folderC', NULL, (SELECT id FROM "users" WHERE "email" = 'user2@example.com'));
 
 INSERT INTO "folders" ("name", "path", "parent_id", "created_by") VALUES 
 ('FolderA_A', 'folderA/folderA_A', (SELECT id FROM "folders" WHERE "name" = 'FolderA' AND "created_by" = (SELECT id FROM "users" WHERE "email" = 'user2@example.com')), (SELECT id FROM "users" WHERE "email" = 'user2@example.com')),
@@ -38,9 +38,9 @@ INSERT INTO "folders" ("name", "path", "parent_id", "created_by") VALUES
 
 -- User 3
 INSERT INTO "folders" ("name", "path", "parent_id", "created_by") VALUES 
-('FolderA', '/', NULL, (SELECT id FROM "users" WHERE "email" = 'user3@example.com')),
-('FolderB', '/', NULL, (SELECT id FROM "users" WHERE "email" = 'user3@example.com')),
-('FolderC', '/', NULL, (SELECT id FROM "users" WHERE "email" = 'user3@example.com'));
+('FolderA', 'folderA', NULL, (SELECT id FROM "users" WHERE "email" = 'user3@example.com')),
+('FolderB', 'folderB', NULL, (SELECT id FROM "users" WHERE "email" = 'user3@example.com')),
+('FolderC', 'folderC', NULL, (SELECT id FROM "users" WHERE "email" = 'user3@example.com'));
 
 INSERT INTO "folders" ("name", "path", "parent_id", "created_by") VALUES 
 ('FolderA_A', 'folderA/folderA_A', (SELECT id FROM "folders" WHERE "name" = 'FolderA' AND "created_by" = (SELECT id FROM "users" WHERE "email" = 'user3@example.com')), (SELECT id FROM "users" WHERE "email" = 'user3@example.com')),
