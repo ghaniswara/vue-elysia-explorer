@@ -37,6 +37,16 @@ Open the frontend in your browser at `http://localhost:5173
         ```
 * search (TODO)
 
+## Tech Stack & Libraries
+* NPM workspaces
+* Bun
+* Elysia
+* Elysia Eden
+* Drizzle
+* Vue 3
+* Vite
+* PrimeVue
+
 ## Folder Structure
 ```
 .
