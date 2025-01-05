@@ -5,7 +5,7 @@ export class FolderService {
   constructor(private readonly folderRepository: IFolderRepository) {}
 
 
-  async getUserFolders(userId: string): Promise<folderTree[]> {
+  async getUserFolders(userId: string): Promise<folderTree> {
     let folderTree = new Map<string, folderTree>();
 
     const rootFolder = await this.folderRepository.getRootFolder(userId);
@@ -32,9 +32,16 @@ export class FolderService {
     }
 
 
-    let res = rootFolder
-    .map(root => folderTree.get(root.id))
-    .filter((folder): folder is folderTree => folder !== undefined);
+    let res : folderTree = {
+      children: rootFolder
+      .map(root => folderTree.get(root.id))
+      .filter((folder): folder is folderTree => folder !== undefined),
+      id: '',
+      name: 'Root',
+      path: '',
+      type: 'folder'
+    }
+    
 
     return res;
   }  

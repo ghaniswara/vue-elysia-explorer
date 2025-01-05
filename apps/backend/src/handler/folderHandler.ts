@@ -1,4 +1,4 @@
-import { GetUserFoldersResponse } from "../model/folder";
+import { GetUserFoldersResponse , folderTree} from "../model/folder";
 import { userRepository } from "../repository/user";
 import { folderService } from "../service/folder";
 
@@ -12,7 +12,13 @@ export async function getUserFolders(username: string) : Promise<typeof GetUserF
         return {
             status: 404,
             message: "User not found",
-            data: []
+            data: {
+                children: [],
+                id: '',
+                name: '',
+                path: '',
+                type: 'folder'
+            }
         }
     }
     
@@ -27,7 +33,13 @@ export async function getUserFolders(username: string) : Promise<typeof GetUserF
         return {
             status: 500,
             message: "Error fetching folders",
-            data: []
+            data: {
+                children: [],
+                id: '',
+                name: '',
+                path: '',
+                type: 'folder'
+            }
         }
     }
 }
