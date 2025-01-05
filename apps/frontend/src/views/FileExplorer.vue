@@ -6,6 +6,7 @@ import { useRoute } from 'vue-router'
 import { api } from 'libs/src/eden'
 import { folderTree } from 'backend/src/model/folder'
 import { Breadcrumb } from 'primevue';
+import ViewPanel from '../components/ViewPanel.vue'
 
 
 
@@ -64,30 +65,20 @@ const handleClick = (node: folderTree) => {
           v-else-if="folders" :tree="folders" v-model:isOpen="isOpen" @click="handleClick" />
         </SplitterPanel>
         <SplitterPanel class="flex flex-col gap-2 p-2 bg-gray-50 rounded-md w-full" :size="75">
-          <div class="flex flex-row gap-2 px-2 py-1 ring-1 ring-gray-200 rounded-md">
+          <div class="flex flex-row gap-2 px-2 py-1 ring-1 ring-gray-200 rounded-md justify-start items-center">
             <div class="flex items-center justify-center">
               📁
             </div>
-            <Breadcrumb :model="filePreview?.path.split('/').map(path => ({ label: path }))" />
+            <Breadcrumb 
+              class="text-sm text-gray-800"
+            :model="filePreview?.path.split('/').map(path => ({ label: path }))" />
           </div>
 
 
           <div class="text-xl font-bold w-full p-2 bg-gray-200 rounded-md">
             {{ filePreview?.name ? filePreview.name : 'No file selected' }}
           </div>
-          <div class="flex flex-row gap-2 w-full h-full">
-            <div class="order-2 basis-1/6 p-2 bg-gray-200 rounded-md flex flex-col gap-2">
-              <div class="text-sm font-bold flex p-2 bg-white rounded-md justify-center items-center">
-                Current Folder Information
-              </div>
-            </div>
-            <div class="grid grid-cols-4 gap-2 basis-5/6 grid-rows-12">
-              <div class="hover:bg-gray-200 rounded-md p-2 cursor-pointer" v-for="file in filePreview?.children"
-                :key="file.id">
-                {{ file.name }}
-              </div>
-            </div>
-          </div>
+          <ViewPanel :filePreview="filePreview" />
         </SplitterPanel>
       </PrimeSplitter>
     </div>
