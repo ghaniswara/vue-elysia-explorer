@@ -1,3 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+:root {
+    --p-autocomplete-overlay-background: #111827;
+    --p-autocomplete-overlay-border-radius: 0.375rem;
+
+}
+
+.p-autocomplete-overlay {
+    @apply p-[0.375rem] flex flex-col bg-gray-900 gap-2 w-[calc(100%-2rem)]  inset-x-0 mt-[1rem];
+}
+
+.p-autocomplete-list-container{
+    @apply flex flex-col gap-2;
+}
+
+.p-autocomplete-list{
+    @apply flex flex-col gap-2;
+}
+
+.p-inputtext {
+    @apply w-full;
+}

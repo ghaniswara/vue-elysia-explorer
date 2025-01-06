@@ -7,12 +7,12 @@ import { api } from 'libs/src/eden'
 import { folderTree } from 'backend/src/model/folder'
 import { Breadcrumb } from 'primevue';
 import ViewPanel from '../components/ViewPanel.vue'
+import SearchBar from '../components/SearchBar.vue'
 
 
 
 const route = useRoute()
 const username = (route.params.path)
-console.log(username)
 
 const folders = ref<folderTree | null>(null)
 const isLoading = ref(true)
@@ -52,9 +52,10 @@ const handleClick = (node: folderTree) => {
 
 <template>
   <div class="flex flex-col gap-2 w-full h-full p-2">
-    <div class="bg-gray-50 rounded-md p-2 items-center justify-center">
-      Search
+    <div class="flex flex-row justify-center bg-pink-900 h-14 rounded-md overflow-clip">
+    <SearchBar />
     </div>
+
     <div class="flex flex-row h-full w-full bg-zinc-900 gap-2">
       <PrimeSplitter layout="horizontal" class="flex flex-row gap-2 w-full h-full">
         <SplitterPanel class="flex bg-gray-50 rounded-md w-full gap-2 p-2 overflow-x-scroll" :size="25">
