@@ -26,11 +26,12 @@ defineProps<{
 	                </div>
 	              </div>
 	            </div>
-	            <div class="grid grid-cols-4 gap-2 basis-5/6 grid-rows-12">
+	            <div class="grid grid-cols-4 gap-2 basis-5/6 grid-rows-12" v-if="filePreview?.children.length">
 	              <div class="hover:bg-gray-200 rounded-md p-2 cursor-pointer" v-for="file in filePreview?.children"
 	                :key="file.id">
 	                {{ file.name }}
 	              </div>
 	            </div>
+				<div v-else class="flex items-center justify-center basis-5/6">No files available</div>
 	          </div>
 </template>
