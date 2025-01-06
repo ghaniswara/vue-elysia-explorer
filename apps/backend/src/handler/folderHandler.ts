@@ -62,3 +62,30 @@ export async function searchFolder(username: string, search: string) : Promise<t
         data: folder
     }
 }
+
+export async function getFolderContentByPath(username: string, path: string) : Promise<typeof GetUserFoldersResponse.static> {
+    const user = await userRepository.getUserByUsername(username);
+    if (!user) {
+        return {
+            status: 404,
+            message: "User not found",
+            data: {
+                children: [],
+                id: '',
+                name: '',
+                path: '',
+                type: 'folder'
+            }
+        }
+    }
+
+    const folder = await folderService.getFolderContent(path, user.id);
+
+    console.log(folder)
+
+    return {
+        status: 200,
+        message: "Folder fetched successfully",
+        data: folder
+    }
+}
