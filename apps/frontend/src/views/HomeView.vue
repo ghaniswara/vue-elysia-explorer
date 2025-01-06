@@ -20,7 +20,6 @@ const fetchUsers = async () => {
     error.value = 'Failed to load users'
     console.error(e)
   } finally {
-    console.log('users', users.value)
     isLoading.value = false
   }
 }

@@ -44,7 +44,6 @@ const isOpen = defineModel<boolean>({ required: true, default: true })
 const handleClick = (node: folderTree) => {
   isOpen.value = !isOpen.value
   if (isOpen.value) {
-    console.log(node)
     setFilePreview(node)
   }
 }

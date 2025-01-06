@@ -24,7 +24,6 @@ onMounted(() => {
 const { setFilePreview } = useFilePreview()
 
 const onClickIcon = () => {
-  console.log('clicked icon')
   emit('update:isOpen', !props.isOpen)
 }
 
