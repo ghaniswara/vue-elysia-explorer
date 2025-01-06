@@ -4,13 +4,15 @@ import { AutoCompleteCompleteEvent, AutoComplete } from 'primevue';
 import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { folderTree } from 'backend/src/model/folder'
+import { useFilePreview } from '../provider/filePreview';
 
+
+const {  setFilePreview } = useFilePreview()
 
 const route = useRoute()
 const username = (route.params.path)
 const folders = ref<folderTree[]>([]);
-const selectedCountry = ref<folderTree | null>(null);
-const filteredCountries = ref<folderTree[]>([]);
+const selectedFolder = ref<folderTree | null>(null);
 const customDT = ref({
     overlay: {
         color: 'red'
@@ -23,25 +25,41 @@ const search = (event: AutoCompleteCompleteEvent) => {
         if (event.query.trim().length) {
                 const response = await api.api.v1.folders[username as string].search.get({
                     $query: {
-                        search: event.query
+                        path: encodeURIComponent(event.query)
                     }
                 })
-                console.log(response)
-                console.log(event.query)
                 folders.value = response?.data?.data ?? []
-                filteredCountries.value = folders.value
         }
     }, 250);
 }
 
+const handleClick = async (path: string) => {
+    const response = await api.api.v1.folders[username as string][encodeURIComponent(path)].get()
+    
+    if(response.data?.data) {
+        setFilePreview(response.data.data)
+    }
+}
 
+const handleViewAll = async () => {
+    if(folders.value.length > 0) {
+        const searchFolder : folderTree = {
+            children: folders.value,
+            id: '',
+            name: 'Search Results',
+            path: '',
+            type: 'folder'
+        }
+        setFilePreview(searchFolder)
+    }
+}
 </script>
 
 <template>
     <div class="test h-10"></div>
 
     <div class="w-full h-full flex flex-col bg-white p-2 items-center justify-center">
-        <AutoComplete class="w-full" v-model="selectedCountry" optionLabel="name" :suggestions="filteredCountries"
+        <AutoComplete class="w-full" v-model="selectedFolder" optionLabel="name" :suggestions="folders"
             @complete="search" placeholder="Search File or Directory" :dt="customDT">
             <template #option="slotProps">
                 <div
@@ -49,9 +67,10 @@ const search = (event: AutoCompleteCompleteEvent) => {
                     <div class="flex items-center justify-center">
                         📁
                     </div>
-                    <div class="flex flex-col">
+                    <button class="flex flex-row justify-between w-full" @click="handleClick(slotProps.option.path)">
                         <span class="text-sm text-gray-800">{{ slotProps.option.name }}</span>
-                    </div>
+                        <span class="text-sm text-gray-600">{{ slotProps.option.path }}</span>
+                    </button>
                 </div>
             </template>
 
@@ -61,8 +80,10 @@ const search = (event: AutoCompleteCompleteEvent) => {
                 </div>
             </template>
 
-            <template #footer v-if="filteredCountries?.length > 0">
-                <button class="
+            <template #footer v-if="folders?.length > 0">
+                <button 
+                @click="handleViewAll()"
+                class="
         hover:bg-gray-100
         px-4 py-2 rounded-md border border-black bg-white text-black text-sm 
         hover:shadow-[4px_4px_0px_0px_rgba(0,0,0)] 
@@ -75,6 +96,5 @@ const search = (event: AutoCompleteCompleteEvent) => {
                 <div class="bg-pink-900"></div>
             </template>
         </AutoComplete>
-
     </div>
 </template>
