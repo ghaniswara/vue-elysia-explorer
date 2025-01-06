@@ -27,9 +27,10 @@ defineProps<{
 	              </div>
 	            </div>
 	            <div class="grid grid-cols-4 gap-2 basis-5/6 grid-rows-12" v-if="filePreview?.children.length">
-	              <div class="hover:bg-gray-200 rounded-md p-2 cursor-pointer" v-for="file in filePreview?.children"
+	              <div class="hover:bg-gray-200 rounded-md p-2 cursor-pointer ring-1 ring-gray-200 flex flex-row items-center justify-between" v-for="file in filePreview?.children"
 	                :key="file.id">
-	                {{ file.name }}
+					<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWZvbGRlciI+PHBhdGggZD0iTTIwIDIwYTIgMiAwIDAgMCAyLTJWOGEyIDIgMCAwIDAtMi0yaC03LjlhMiAyIDAgMCAxLTEuNjktLjlMOS42IDMuOUEyIDIgMCAwIDAgNy45MyAzSDRhMiAyIDAgMCAwLTIgMnYxM2EyIDIgMCAwIDAgMiAyWiIvPjwvc3ZnPg==" alt="">
+	                <p class="ml-2 text-sm text-ellipsis max-w-max overflow-hidden">{{ file.name }}</p>
 	              </div>
 	            </div>
 				<div v-else class="flex items-center justify-center basis-5/6">No files available</div>
