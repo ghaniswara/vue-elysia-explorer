@@ -46,7 +46,6 @@ export async function getUserFolders(username: string) : Promise<typeof GetUserF
 
 export async function searchFolder(username: string, search: string) : Promise<typeof SearchFolderResponse.static> {
     const user = await userRepository.getUserByUsername(username);
-    
     if (!user) {
         return {
             status: 404,
@@ -55,7 +54,7 @@ export async function searchFolder(username: string, search: string) : Promise<t
         }
     }
 
-    const folder = await folderService.findFoldersByPath(search);
+    const folder = await folderService.findFoldersByPath(search, user.id);
 
     return {
         status: 200,

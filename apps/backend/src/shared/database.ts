@@ -32,10 +32,10 @@ const queryClient = postgres({
 
 const dbConfig = {
   schema: schema,
-  logger: IS_LOCAL,
+  logger: true,
 };
 
-export const db = drizzle(queryClient, dbConfig);
+export const db = drizzle(queryClient, dbConfig,);
 
 // Type to represent the database connection, it can be a connection or a transaction
 export type DB =

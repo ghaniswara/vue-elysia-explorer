@@ -9,7 +9,7 @@ export interface IFolderRepository {
   getFolderById(id: string): Promise<Folder | undefined>;
   createFolder(folder: CreateFolder): Promise<Folder>;
   getFolderByPath(path: string): Promise<Folder | undefined>;
-  findFoldersByPath(path: string): Promise<Folder[]>;
+  findFoldersByPath(path: string, userId?: string): Promise<Folder[]>;
 }
 
 
@@ -55,9 +55,13 @@ const getFolderByPath = async (path: string) => {
   return folder;
 };
 
-const findFoldersByPath = async (path: string) => {
+const findFoldersByPath = async (path: string, userId?: string) => {
  const res = await db.query.folders.findMany({
-  where: like(folders.path, path+'%'),
+  where: and(
+    like(folders.path, '%'+path+'%'),
+    userId ? eq(folders.createdBy, userId) : undefined
+  ),
+  orderBy: (folders, { asc }) => [asc(folders.name)],
  });
  return res;
 };

@@ -48,8 +48,8 @@ export class FolderService {
 
 
   // TODO: implement fuzzy search
-  async findFoldersByPath(path: string) : Promise<folderTree[]> {
-    const folders = await this.folderRepository.findFoldersByPath(path);
+  async findFoldersByPath(path: string, userId?: string) : Promise<folderTree[]> {
+    const folders = await this.folderRepository.findFoldersByPath(path, userId);
     let res : folderTree[] = []
     for(const folder of folders) {
         res.push({
